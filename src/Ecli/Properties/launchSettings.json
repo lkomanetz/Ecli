@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "SysSwUpgrader": {
+      "commandName": "Project",
+      "commandLineArgs": "dbupdate"
+    }
+  }
+}

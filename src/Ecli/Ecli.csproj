@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <DebugType>portable</DebugType>
+    <AssemblyName>ecli</AssemblyName>
+    <OutputType>Exe</OutputType>
+    <PackageId>ExtensibleCli</PackageId>
+    <RuntimeIdentifiers>win10-x64;win7-x64</RuntimeIdentifiers>
+    <RootNamespace>Ecli</RootNamespace>
+    <Authors>Logan Komanetz</Authors>
+    <Company>TBD</Company>
+    <Description>Extensible command-line interface shell</Description>
+    <Copyright>2018</Copyright>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Fmp.Executioner" Version="1.0.123" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="1.1.1" />
+    <PackageReference Include="Newtonsoft.JSON" Version="10.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="2.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Ecli.Contracts\Ecli.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>
