@@ -12,7 +12,7 @@ namespace Ecli {
 
 		public static void Main(string[] args) {
 			try {
-				IFinder<ICommand> cmdFinder = new CommandFinder();
+				IFinder<ICommand> cmdFinder = new CommandFinder("bin");
 				IFileReader fileReader = new SettingsFileReader(cmdFinder);
 				Program p = new Program(cmdFinder, args, fileReader);
 				p.Run(args);

@@ -25,6 +25,8 @@ namespace Ecli.FileReaders.SettingsFileReaders {
 
 		private IDictionary<string, ISettingsReader> _availableReaders;
 
+		//TODO(Logan) -> Change this to take an array of IFinder<ICommand> because of interface change.
+		//TODO(Logan) -> Fix Ecli.FileReaders.Tests surrounding this class.
 		public SettingsFileReader(IFinder<ICommand> cmdFinder) =>
 			_availableReaders = cmdFinder.FindAll().ToDictionary(c => c.CliCommandName, c => c.SettingsReader);
 

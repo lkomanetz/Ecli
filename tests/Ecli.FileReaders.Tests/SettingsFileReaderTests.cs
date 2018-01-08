@@ -17,7 +17,7 @@ namespace Ecli.FileReaders.Tests {
 		private Assembly _thisAssembly;
 
 		public SettingsFileReaderTests() {
-			_reader = new SettingsFileReader(new CommandFinder());
+			_reader = new SettingsFileReader(new CommandFinder(Directory.GetCurrentDirectory()));
 			_thisAssembly = Assembly.GetAssembly(typeof(SettingsFileReaderTests));
 		}
 

@@ -1,6 +1,7 @@
 using Ecli.FileReaders.SettingsFileReaders;
 using Ecli.Contracts;
 using System;
+using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 using System.Reflection;
@@ -15,7 +16,7 @@ namespace Ecli.Commands {
 
 		public Help() {
 			_displayManager = new DisplayManager();
-			_commandFinder = new CommandFinder();
+			_commandFinder = new CommandFinder(Directory.GetCurrentDirectory());
 			_helpTextBuilder = new HelpCommandTextBuilder();
 		}
 
