@@ -4,15 +4,18 @@ using Ecli.FileReaders;
 using Ecli.FileReaders.SettingsFileReaders;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace Ecli {
 
 	public class EntryPoint {
 
+		private const string DLL_DIR = "Plugins";
+
 		public static void Main(string[] args) {
 			try {
-				IFinder<ICommand> cmdFinder = new CommandFinder("bin");
+				IFinder<ICommand> cmdFinder = InitializeCommandFinder();
 				IFileReader fileReader = new SettingsFileReader(cmdFinder);
 				Program p = new Program(cmdFinder, args, fileReader);
 				p.Run(args);
@@ -25,6 +28,11 @@ namespace Ecli {
 				Console.ForegroundColor = ConsoleColor.White;
 			}
 			Environment.Exit(0);
+		}
+
+		private static IFinder<ICommand> InitializeCommandFinder() {
+			string[] filePaths = Directory.GetFiles(DLL_DIR, "*.dll", SearchOption.AllDirectories);
+			return new CommandFinder(filePaths);
 		}
 
 	}

@@ -2,6 +2,8 @@ using Ecli;
 using Ecli.Commands;
 using Ecli.Contracts;
 using System;
+using System.IO;
+using System.Linq;
 using Xunit;
 
 namespace Ecli.Commands.Tests {
@@ -10,15 +12,11 @@ namespace Ecli.Commands.Tests {
 
         [Fact]
         public void HelpCommandExecutesSuccessfully() {
-            ICommand cmd = new Help();
+            string dllPath = $@"{Directory.GetCurrentDirectory()}\ecli.dll";
+            IFinder<ICommand> cmdFinder = new CommandFinder(dllPath);
+            ICommand cmd = cmdFinder.Find<Help>();
             bool succeeded = cmd.Execute(String.Empty, null);
             Assert.True(succeeded);
-        }
-
-        private class MockFinder : IFinder<ICommand> {
-
-            public ICommand[] FindAll() => new ICommand[0];
-
         }
 
     }

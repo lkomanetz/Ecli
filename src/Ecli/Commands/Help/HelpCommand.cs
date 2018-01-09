@@ -16,7 +16,7 @@ namespace Ecli.Commands {
 
 		public Help() {
 			_displayManager = new DisplayManager();
-			_commandFinder = new CommandFinder(Directory.GetCurrentDirectory());
+			_commandFinder = new CommandFinder($@"{Directory.GetCurrentDirectory()}\ecli.dll");
 			_helpTextBuilder = new HelpCommandTextBuilder();
 		}
 

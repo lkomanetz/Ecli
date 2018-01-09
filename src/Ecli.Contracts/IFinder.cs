@@ -6,6 +6,8 @@ namespace Ecli.Contracts {
 
 		T[] FindAll();
 
+		T Find<TInput>() where TInput : T;
+
 	}
 
 }

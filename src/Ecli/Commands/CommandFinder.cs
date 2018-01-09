@@ -11,13 +11,20 @@ namespace Ecli.Commands {
 
 	public class CommandFinder : IFinder<ICommand> {
 
-		private string _dllName;
+		private string[] _dllNames;
 
-		public CommandFinder(string dllName) => _dllName = dllName;
+		public CommandFinder(string dllName) => _dllNames = new string[] { dllName };
+		public CommandFinder(string[] dllNames) => _dllNames = dllNames;
+
+		public CommandFinder(Assembly assembly) =>
+			_dllNames = new string[] { Path.GetFileName(assembly.Location) };
+
+		public CommandFinder(Assembly[] assemblies) =>
+			_dllNames = assemblies.Select(a => Path.GetFileName(a.Location)).ToArray();
 
 		public ICommand[] FindAll() {
-			Assembly assembly = Assembly.LoadFrom(_dllName);
-			IEnumerable<Type> commandTypes = assembly.DefinedTypes
+			IEnumerable<Assembly> assemblies = _dllNames.Select(s => Assembly.LoadFrom(s));
+			IEnumerable<Type> commandTypes = assemblies.SelectMany(a => a.DefinedTypes)
 				.Where(ti => ti.ImplementedInterfaces.Contains(typeof(ICommand)))
 				.Select(ti => ti.AsType());
 
@@ -26,12 +33,9 @@ namespace Ecli.Commands {
 				.ToArray();
 		}
 
-		private IEnumerable<string> GetDllFileNames(string directoryPath) {
-			DirectoryInfo info = new DirectoryInfo(directoryPath);
-			FileInfo[] foundFiles = info.GetFiles("*.dll");
-			return foundFiles.Select(f => f.FullName);
-		}
-
+		public ICommand Find<T>() where T : ICommand =>
+			FindAll().Where(c => c.GetType() == typeof(T)).SingleOrDefault();
+		
 	}
 
 }

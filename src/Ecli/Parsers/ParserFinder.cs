@@ -22,6 +22,9 @@ namespace Ecli.Parsers {
 				.ToArray();
 		}
 
+		public IParser Find<T>() where T : IParser =>
+			FindAll().Where(p => p.GetType() == typeof(T)).SingleOrDefault();
+
 	}
 
 }

@@ -21,6 +21,9 @@ namespace Ecli.FileReaders {
 				.ToArray();
 		}
 
+		public ISettingsReader Find<T>() where T : ISettingsReader =>
+			FindAll().Where(s => s.GetType() == typeof(T)).SingleOrDefault();
+
 	}
 
 }
