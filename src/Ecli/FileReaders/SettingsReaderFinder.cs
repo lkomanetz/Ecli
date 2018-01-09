@@ -1,4 +1,3 @@
-using Ecli.Contracts;
 using Ecli.FileReaders.SettingsFileReaders;
 using System;
 using System.Collections.Generic;

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ecli.Contracts {
+namespace Ecli {
 
 	public class DateRange {
 

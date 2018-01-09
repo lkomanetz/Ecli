@@ -1,6 +1,5 @@
 using Ecli;
 using Ecli.Commands;
-using Ecli.Contracts;
 using System;
 using System.IO;
 using System.Linq;

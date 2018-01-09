@@ -34,8 +34,4 @@
     <Folder Include="Properties\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Ecli.Contracts\Ecli.Contracts.csproj" />
-  </ItemGroup>
-
 </Project>

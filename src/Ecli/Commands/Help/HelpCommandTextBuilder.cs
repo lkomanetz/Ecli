@@ -1,4 +1,3 @@
-using Ecli.Contracts;
 using System;
 
 namespace Ecli.Commands {

@@ -6,7 +6,6 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
-using Ecli.Contracts;
 using Ecli.Exceptions;
 using Ecli.FileReaders;
 using Ecli.Commands;
@@ -25,10 +24,12 @@ namespace Ecli.FileReaders.SettingsFileReaders {
 
 		private IDictionary<string, ISettingsReader> _availableReaders;
 
-		//TODO(Logan) -> Change this to take an array of IFinder<ICommand> because of interface change.
 		//TODO(Logan) -> Fix Ecli.FileReaders.Tests surrounding this class.
-		public SettingsFileReader(IFinder<ICommand> cmdFinder) =>
-			_availableReaders = cmdFinder.FindAll().ToDictionary(c => c.CliCommandName, c => c.SettingsReader);
+		public SettingsFileReader(IFinder<ICommand>[] cmdFinders) {
+			_availableReaders = cmdFinders
+				.SelectMany(f => f.FindAll())
+				.ToDictionary(c => c.CliCommandName, c => c.SettingsReader);
+		}
 
 		public FileReaderResult Read(string settings) {
 			try {

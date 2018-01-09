@@ -1,4 +1,3 @@
-using Ecli.Contracts;
 using Ecli.Exceptions;
 using System;
 using System.Linq;

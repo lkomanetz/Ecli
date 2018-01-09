@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Ecli\Ecli.csproj" />
-    <ProjectReference Include="..\..\src\Ecli.Contracts\Ecli.Contracts.csproj" />
   </ItemGroup>
 
   <ItemGroup>

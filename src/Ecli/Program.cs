@@ -6,10 +6,8 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Ecli.Commands;
-using Ecli.Contracts;
 using Ecli.FileReaders;
 using Ecli.Parsers;
-using Ecli.Upgraders;
 using Ecli.FileReaders.SettingsFileReaders;
 using System.Reflection;
 

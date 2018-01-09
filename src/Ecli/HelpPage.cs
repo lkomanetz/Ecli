@@ -1,4 +1,3 @@
-using Ecli.Contracts;
 using System;
 using Ecli.Parsers;
 

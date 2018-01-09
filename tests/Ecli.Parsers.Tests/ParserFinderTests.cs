@@ -1,5 +1,4 @@
 using Ecli;
-using Ecli.Contracts;
 using System;
 using System.Linq;
 using Xunit;

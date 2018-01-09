@@ -1,4 +1,3 @@
-using Ecli.Contracts;
 using Ecli.Commands;
 using Ecli.FileReaders;
 using Ecli.FileReaders.SettingsFileReaders;
@@ -17,7 +16,7 @@ namespace Ecli {
 			try {
 				if (!Directory.Exists(DLL_DIR)) Directory.CreateDirectory(DLL_DIR);
 				IFinder<ICommand> cmdFinder = InitializeCommandFinder();
-				IFileReader fileReader = new SettingsFileReader(cmdFinder);
+				IFileReader fileReader = new SettingsFileReader(new IFinder<ICommand>[] { cmdFinder });
 				Program p = new Program(cmdFinder, args, fileReader);
 				p.Run(args);
 			}
