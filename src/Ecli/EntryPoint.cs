@@ -15,6 +15,7 @@ namespace Ecli {
 
 		public static void Main(string[] args) {
 			try {
+				if (!Directory.Exists(DLL_DIR)) Directory.CreateDirectory(DLL_DIR);
 				IFinder<ICommand> cmdFinder = InitializeCommandFinder();
 				IFileReader fileReader = new SettingsFileReader(cmdFinder);
 				Program p = new Program(cmdFinder, args, fileReader);

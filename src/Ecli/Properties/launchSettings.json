@@ -2,7 +2,7 @@
   "profiles": {
     "SysSwUpgrader": {
       "commandName": "Project",
-      "commandLineArgs": "dbupdate"
+      "commandLineArgs": "help"
     }
   }
 }

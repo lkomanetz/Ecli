@@ -14,7 +14,7 @@ namespace Ecli.Commands.Tests {
         public void HelpCommandExecutesSuccessfully() {
             string dllPath = $@"{Directory.GetCurrentDirectory()}\ecli.dll";
             IFinder<ICommand> cmdFinder = new CommandFinder(dllPath);
-            ICommand cmd = cmdFinder.Find<Help>();
+            ICommand cmd = new Help(cmdFinder);
             bool succeeded = cmd.Execute(String.Empty, null);
             Assert.True(succeeded);
         }

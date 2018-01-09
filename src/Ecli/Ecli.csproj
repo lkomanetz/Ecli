@@ -12,6 +12,7 @@
     <Company>TBD</Company>
     <Description>Extensible command-line interface shell</Description>
     <Copyright>2018</Copyright>
+    <StartupObject>Ecli.EntryPoint</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>

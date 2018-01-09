@@ -25,8 +25,9 @@ namespace Ecli {
 		public Program(IFinder<ICommand> cmdFinder, string[] appArguments, IFileReader fileReader) {
 			_displayManager = new DisplayManager();
 			_commandFinder = cmdFinder;	
-			_availableCommands = cmdFinder.FindAll().ToDictionary(cmd => cmd.CliCommandName);
 			_fileReader = fileReader;
+			_availableCommands = cmdFinder.FindAll().ToDictionary(cmd => cmd.CliCommandName);
+			AddHelpCommand();
 		}
 
 		public string ExecutingDirectoryLocation =>
@@ -55,6 +56,16 @@ namespace Ecli {
 			return result.Settings
 				.Where(s => s.CommandName == cmd.CliCommandName)
 				.Single();
+		}
+
+		private void AddHelpCommand() {
+			ICommand cmd = new Help(_commandFinder);
+			if (!_availableCommands.ContainsKey(cmd.CliCommandName)) {
+				_availableCommands.Add(new KeyValuePair<string, ICommand>(cmd.CliCommandName, cmd));
+			} 
+			else {
+				_availableCommands[cmd.CliCommandName] = cmd;
+			}
 		}
 
 	}
