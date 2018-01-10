@@ -51,9 +51,12 @@ namespace Ecli {
 			string settings = File.ReadAllText($"{ExecutingDirectoryLocation}\\appsettings.json");
 			var result = (SettingsFileReaderResult)_fileReader.Read(settings);
 
-			return result.Settings
+			// TODO(Logan) -> I should figure out a better way to handle when results aren't found.
+			ISettingsReaderResult foundResult = result.Settings
 				.Where(s => s.CommandName == cmd.CliCommandName)
-				.Single();
+				.SingleOrDefault();
+
+			return foundResult ?? new EmptySettingsReaderResult(cmd.CliCommandName);
 		}
 
 		private void AddHelpCommand() {
