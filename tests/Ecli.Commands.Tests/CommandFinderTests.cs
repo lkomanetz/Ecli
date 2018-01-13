@@ -32,7 +32,7 @@ namespace Ecli.Commands.Tests {
 
 		[Theory]
 		[InlineData("Ecli.Commands.Tests.dll")]
-		public void CommandFinderCanFindSingleCommand(string assemblyName) {
+		public void CanFindSingleCommand(string assemblyName) {
 			string dllFile = $@"{Directory.GetCurrentDirectory()}\{assemblyName}";
 			IFinder<ICommand> cmdFinder = new CommandFinder(dllFile);
 			ICommand cmd = cmdFinder.Find<FirstTestCommand>();
@@ -41,7 +41,7 @@ namespace Ecli.Commands.Tests {
 		}
 
 		[Fact]
-		public void CommandFinderCanFindFromAssembly() {
+		public void CanFindFromAssembly() {
 			Assembly assembly = this.GetType().Assembly;
 			IFinder<ICommand> cmdFinder = new CommandFinder(assembly);
 			ICommand cmd = cmdFinder.Find<FirstTestCommand>();
