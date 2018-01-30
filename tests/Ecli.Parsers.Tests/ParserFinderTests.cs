@@ -13,16 +13,19 @@ namespace Ecli.Parsers.Tests {
 
 		[Fact]
 		public void ParserFinderFindsAllNecessaryParsers() {
-			int expectedFoundParserCount = 2;
-
+			int expectedFoundParserCount = 1;
 			IParser[] foundParsers = _parserFinder.FindAll();
-			Assert.True(foundParsers.Length == expectedFoundParserCount);
+			Assert.True(
+				foundParsers.Length == expectedFoundParserCount,
+				$"Expected {expectedFoundParserCount} but was {foundParsers.Length}."
+			);
 
-			var nonArgumentParsers = foundParsers.Where(p => p.GetType() != typeof(ArgumentParser));
-			Assert.True(nonArgumentParsers.Count() == expectedFoundParserCount);
-
-			bool argumentParserFound = foundParsers.Any(p => p.GetType() == typeof(ArgumentParser));
-			Assert.False(argumentParserFound);
+			IParser mockParser = foundParsers
+				.Where(p => p is MockParser)
+				.SingleOrDefault();
+			
+			Assert.NotNull(mockParser);
+			Assert.IsType(typeof(MockParser), mockParser);
 		}
 
 	}

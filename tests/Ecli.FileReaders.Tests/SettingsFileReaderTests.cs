@@ -23,31 +23,21 @@ namespace Ecli.FileReaders.Tests {
 			_thisAssembly = Assembly.GetAssembly(typeof(SettingsFileReaderTests));
 		}
 
-		//TODO(Logan) -> Fix this test.
 		[Fact]
 		public void ReaderRetrievesDbUpgraderSettings() {
+			int expectedResultCount = 1;
 			string settings = GetResourceContentsFrom(_thisAssembly);
 			var result = (SettingsFileReaderResult)_reader.Read(settings);
 
 			Assert.True(result.Exception.GetType() == typeof(EmptyException), result.Exception.Message);
+			Assert.True(
+				result.Settings.Count() == expectedResultCount,
+				$"Expected {expectedResultCount} results but was {result.Settings.Count()}."
+			);
 
-			foreach (ISettingsReaderResult settingResult in result.Settings) {
-				switch (settingResult) {
-					/*
-					case DbUpdateSettingsReaderResult x:
-						Assert.True(x.Exception.GetType() == typeof(EmptyException));
-						break;
-					case EmptySettingsReaderResult x:
-						Assert.True(x.Exception.GetType() == typeof(EmptyException));
-						Assert.True(
-							x.CommandName.Equals("help"),
-							$"Expected help command but was '{x.CommandName}'"
-						);
-						break;
-					*/
-					default: throw new Exception("No valid settings results where found");
-				}
-			}
+			bool noExceptionsThrown = result.Settings
+				.All(s => s.Exception.GetType() == typeof(EmptyException));
+			Assert.True(noExceptionsThrown, "A settings reader threw an exception.");
 		}
 
 		private string GetResourceContentsFrom(Assembly assembly) {

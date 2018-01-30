@@ -22,6 +22,7 @@ namespace Ecli.FileReaders.SettingsFileReaders {
 	 */
 	public class SettingsFileReader : IFileReader {
 
+		// String is the CliCommandName for the corresponding settings reader
 		private IDictionary<string, ISettingsReader> _availableReaders;
 
 		//TODO(Logan) -> Fix Ecli.FileReaders.Tests surrounding this class.
