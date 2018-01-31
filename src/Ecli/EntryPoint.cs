@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 
 namespace Ecli {
 
@@ -14,8 +15,10 @@ namespace Ecli {
 
 		public static void Main(string[] args) {
 			try {
-				if (!Directory.Exists(DLL_DIR)) Directory.CreateDirectory(DLL_DIR);
-				IFinder<ICommand> cmdFinder = InitializeCommandFinder();
+				string rootDir = new FileInfo($"{Assembly.GetEntryAssembly().Location}").DirectoryName;
+				string pluginDir = $"{rootDir}\\{DLL_DIR}";
+				if (!Directory.Exists(pluginDir)) Directory.CreateDirectory(pluginDir);
+				IFinder<ICommand> cmdFinder = InitializeCommandFinder(pluginDir);
 				IFileReader fileReader = new SettingsFileReader(new IFinder<ICommand>[] { cmdFinder });
 				Program p = new Program(cmdFinder, args, fileReader);
 				p.Run(args);
@@ -30,8 +33,8 @@ namespace Ecli {
 			Environment.Exit(0);
 		}
 
-		private static IFinder<ICommand> InitializeCommandFinder() {
-			string[] filePaths = Directory.GetFiles(DLL_DIR, "*.dll", SearchOption.AllDirectories);
+		private static IFinder<ICommand> InitializeCommandFinder(string rootDir) {
+			string[] filePaths = Directory.GetFiles(rootDir, "*.dll", SearchOption.AllDirectories);
 			return new CommandFinder(filePaths);
 		}
 

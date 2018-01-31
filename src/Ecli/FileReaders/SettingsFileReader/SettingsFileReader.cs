@@ -25,7 +25,6 @@ namespace Ecli.FileReaders.SettingsFileReaders {
 		// String is the CliCommandName for the corresponding settings reader
 		private IDictionary<string, ISettingsReader> _availableReaders;
 
-		//TODO(Logan) -> Fix Ecli.FileReaders.Tests surrounding this class.
 		public SettingsFileReader(IFinder<ICommand>[] cmdFinders) {
 			_availableReaders = cmdFinders
 				.SelectMany(f => f.FindAll())
